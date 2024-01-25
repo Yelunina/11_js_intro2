@@ -13,6 +13,8 @@ index = binarySearch(arr, 55);
 console.log(`index = ${index}`);
 index = binarySearch(arr, 2);
 console.log(`index = ${index}`);
+sort(arr, (a,b) => b - a);
+printArray(arr);
 
 
 
@@ -40,23 +42,31 @@ function bubbleSort(arr) {
 // O(logN) 
 function binarySearch(arr, value) {
     //TODO Homework
-    let left = -1;
-    let right = arr.length;
-    while (right - left > 1) {
-        const middle = Math.floor((left + right) / 2)
-
-        if (value === arr[middle]) {
-            return middle
+    let l = 0;
+    let r = arr.length - 1;
+    while (l <= r) {
+        let mid = Math.round((l + r) / 2);
+        if (arr[mid] === value) {
+            return mid
         }
-        if (value < arr[middle]) {
-            right = middle;
+        if (value < arr[mid]) {
+            r = mid - 1;
         } else {
-            left = middle;
+            l = mid + 1;
         }
     }
-    return false;
+    return -l - 1;
 }
 
 function sort(arr, comparator) {
     //TODO Homework advanced
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+            if (comparator(arr[j], arr[j + 1]) > 0) {
+                let t = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = t;
+            }
+        }
+    }
 }
